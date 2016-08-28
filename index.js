@@ -1,3 +1,5 @@
+'use strict';
+
 // combinations
 var makeCombinations = function (stringOrArray, number, repetition) {
   if (stringOrArray.constructor !== String && stringOrArray.constructor !== Array) {
@@ -9,31 +11,41 @@ var makeCombinations = function (stringOrArray, number, repetition) {
   repetition = repetition || false;
   if (repetition.constructor !== Boolean) { throw new Error('Repetition must be a boolean value'); }
 
-  if (!repetition) {
-    // change str to arr
-    var input = stringOrArray.constructor === String ? stringOrArray.split('') : stringOrArray;
+  /**
+  * Code
+  */
 
-    if (input.length === number) {
-      return [input.join('')];
-    } else if (number === 1) {
-      return input;
-    } else {
-      var results = [];
+  // change str to arr
+  var input = stringOrArray.constructor === String ? stringOrArray.split('') : stringOrArray;
 
-      // set anchor
-      input.forEach(function (char, index, arr) {
-        var anchor = char;
-        var subComb = makeCombinations(arr.slice(index + 1), number - 1, false);
-        // var subComb = makeCombinations(arr, number - 1, false);
+  if (input.length === number) {
+    return [input.join('')];
+  } else if (number === 1) {
+    return input;
+  } else {
+    var results = [];
 
-        // concat perm with anchor
-        subComb.forEach(function (element) {
-          results.push(anchor.concat(element));
-        });
+    // set anchor
+    input.forEach(function (char, index, arr) {
+      var anchor = char;
+      var subComb;
+      var subArr;
+
+      if (!repetition) {
+        subArr = arr.slice(index + 1);
+      } else {
+        subArr = arr;
+      }
+
+      subComb = makeCombinations(subArr, number - 1, repetition);
+
+      // concat perm with anchor => different when repetition === true
+      subComb.forEach(function (element) {
+        results.push(anchor.concat(element));
       });
+    });
 
-      return results;
-    }
+    return results;
   }
 };
 
