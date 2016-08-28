@@ -1,5 +1,14 @@
 // combinations
 var makeCombinations = function (stringOrArray, number, repetition) {
+  if (stringOrArray.constructor !== String && stringOrArray.constructor !== Array) {
+    throw new Error('Collection must either be a String or an Array');
+  }
+  if (!Number.isInteger(number)) { throw new Error('Selection size must be an integer'); }
+  if (number <= 0 || number > stringOrArray.length) { throw new Error('Selection size must be greater than 0 and less than collection size'); }
+
+  repetition = repetition || false;
+  if (repetition.constructor !== Boolean) { throw new Error('Repetition must be a boolean value'); }
+
   if (!repetition) {
     // change str to arr
     var input = stringOrArray.constructor === String ? stringOrArray.split('') : stringOrArray;
