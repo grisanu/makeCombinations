@@ -17,6 +17,8 @@ var makeCombinations = function (stringOrArray, number, repetition) {
 
   // change str to arr
   var input = stringOrArray.constructor === String ? stringOrArray.split('') : stringOrArray;
+  // make each element into str
+  input = input.map((element) => { return element.toString(); });
 
   if (input.length === number) {
     return [input.join('')];
@@ -49,7 +51,9 @@ var makeCombinations = function (stringOrArray, number, repetition) {
   }
 };
 
-console.log(makeCombinations('abc', 2, false)); //[ 'ab', 'ac', 'bc' ]
-console.log(makeCombinations('abc', 3, false)); //[ 'abc' ]
-console.log(makeCombinations('abcd', 2, false)); //[ 'ab', 'ac', 'ad', 'bc', 'bd', 'cd' ]
-console.log(makeCombinations('abcd', 3, false)); //[ 'abc', 'abd', 'acd', 'bcd' ]
+// console.log(makeCombinations('abc', 2, false)); //[ 'ab', 'ac', 'bc' ]
+// console.log(makeCombinations('abc', 3, false)); //[ 'abc' ]
+// console.log(makeCombinations('abcd', 2, false)); //[ 'ab', 'ac', 'ad', 'bc', 'bd', 'cd' ]
+// console.log(makeCombinations('abcd', 3, false)); //[ 'abc', 'abd', 'acd', 'bcd' ]
+
+console.log(makeCombinations([1,2,3,4,5,-1,-4,6,-5,2,2], 4));
